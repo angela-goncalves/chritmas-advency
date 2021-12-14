@@ -52,7 +52,7 @@ Let's add the url of the image, so we can know exactly what gift is.
 
 ## Day 11:
 
-There's a lot of things in the list now, it will be better if we split the form from the list.
+There's a lot of things in the list now, it will be better if we split the form from the list with a modal.
 
 ## Day 12:
 

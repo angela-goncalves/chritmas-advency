@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 export default function Footer() {
   return (
-    <div className="mt-20 w-full">
+    <div className="mt-20 w-full ">
       <Link href="/">
         <a className="flex flex-col items-center">
           <svg
@@ -56,7 +56,7 @@ export default function Footer() {
           <h2 className="text-sm md:text-xl font-medium">Angela Goncalves</h2>
         </a>
       </Link>
-      <div className="flex flex-row mt-4 mb-6 md:my-8 space-x-4 md:space-x-10">
+      <div className="flex flex-row mt-4 mb-6 md:mt-8 space-x-4 md:space-x-10 justify-center">
         <a href="https://www.linkedin.com/in/angela-goncalves-6009a518a/">
           <img src="../svg/Linkedin.svg" alt="my linkedin profile" />
         </a>

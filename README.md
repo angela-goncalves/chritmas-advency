@@ -4,12 +4,6 @@
 
 ### The idea is build a chritsmas app to make a present's list 🎁
 
-## ❤️
-
-### Goncy proposed an advent challenge for 25 days, so here I am, practicing React, Next, TypeScript and Tailwindcss.
-
-### The idea is build a chritsmas app to make a present's list 🎁
-
 ## Day 1:
 
 Just write a list of gifts 🎁

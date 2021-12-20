@@ -65,3 +65,15 @@ Just in case we write the name of the gift like it sounds, now we need to edit i
 ## Day 14:
 
 Not all of us have the same abilities, so let's make the app usable by people with disabilities 💝
+
+## Day 15:
+
+To store the list in a safe place we need to change the local Storage. Let's try to prepare us to that.
+
+## Day 16:
+
+lets create a button to generate random gifts
+
+## Day 17:
+
+Add the price of each gift

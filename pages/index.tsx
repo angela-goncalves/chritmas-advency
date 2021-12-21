@@ -18,8 +18,10 @@ export default function Home() {
   console.log(gifts);
   const deleteGift = (id: any) => {
     try {
-      setGifts(gifts.filter((el) => id !== el.id));
-      window.localStorage.setItem("gifts", JSON.stringify(gifts));
+      const listWithout1 = gifts.filter((el) => id !== el.id);
+      setGifts(listWithout1);
+      console.log(listWithout1);
+      window.localStorage.setItem("gifts", JSON.stringify(listWithout1));
     } catch (e) {
       console.error(e);
     }
@@ -80,13 +82,13 @@ export default function Home() {
           />
         </ModalAddGift>
 
-        <div className="flex flex-col justify-between h-[450px] w-[340px] md:w-[400px] overflow-auto p-4 bg-neutral-700 rounded-md">
+        <div className="flex flex-col justify-between h-[450px] w-[350px] md:w-[400px] overflow-auto p-4 bg-neutral-700 rounded-md">
           {gifts.length === 0 ? (
             <p className="pt-4 text-center">Oh no! The list is empty!</p>
           ) : (
             gifts.map((gift: any) => {
               return (
-                <div key={gift.id}>
+                <div key={gift.id} className="mt-2">
                   <ListGifts
                     gift={gift}
                     deleteGift={deleteGift}

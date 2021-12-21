@@ -2,7 +2,7 @@
 
 ### <a href="https://twitter.com/goncy/status/1466050967808401409">Goncy</a> proposed an advency challenge for 25 days.
 
-### The idea is build a chritsmas app to make a present's list 🎁
+### The idea is build a chritsmas list app 🎁 with the instructions 📖 released every day:
 
 ## Day 1:
 
@@ -66,8 +66,20 @@ To store the list in a safe place we need to change the local Storage. Let's try
 
 ## Day 16:
 
-lets create a button to generate random gifts
+Let's create a button to generate random gifts
 
 ## Day 17:
 
-Add the price of each gift
+We want to know how much we're gonna spend on each gift so, let's have the price.
+
+## Day 18:
+
+Now we need to know how much we're gonna spend on all gifts.
+
+## Day 19:
+
+We want to the
+
+## Day 20:
+
+## Day 21:

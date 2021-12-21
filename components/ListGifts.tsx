@@ -11,7 +11,7 @@ export default function ListGifts({
   //agregar un booleano al objeto del elemento para saber si fue seleccionado o no. Ej. wantEdit: false
 
   const onEdit = () => {
-    setEdit(gift.id);
+    setEdit(gift);
     setOpen(!open);
   };
   return (
@@ -19,7 +19,7 @@ export default function ListGifts({
       <li className="w-full flex flex-row items-center justify-between">
         <div className="flex flex-row">
           {gift.image.length <= 0 ? (
-            <p className="w-16">¿image?</p>
+            <p className="w-16 mr-2 md:mr-5">¿image?</p>
           ) : (
             <img
               src={gift.image}
@@ -45,10 +45,11 @@ export default function ListGifts({
           </div>
         </div>
 
-        <div>
+        <div className="">
+          {/*edit button*/}
           <button
             onClick={onEdit}
-            className="bg-white h-max py-1 px-2 rounded-lg mr-3 "
+            className="bg-white h-max py-1 px-2 rounded-lg mr-3"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -65,13 +66,36 @@ export default function ListGifts({
               />
             </svg>
           </button>
+
+          {/*duplicate button:*/}
           <button
-            onClick={() => deleteGift(gift.id)}
-            className="bg-red-600 h-max py-1 px-2 rounded-lg"
+            onClick={onEdit}
+            className="bg-white h-max py-1 px-2 rounded-lg mr-3 my-1"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-white "
+              className="h-6 w-6 text-red-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+              />
+            </svg>
+          </button>
+
+          {/*delete button: */}
+          <button
+            onClick={() => deleteGift(gift.id)}
+            className="bg-red-600 w-10 h-max py-1 px-2 rounded-lg my-1"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 text-white"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

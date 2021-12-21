@@ -34,7 +34,7 @@ const ModalAddGift: FC<CartModalProps> = ({ open, setOpen, children }: any) => {
               leaveTo="translate-x-full"
             >
               <div className="relative w-full">
-                <div className="flex flex-col bg-neutral-700 px-10 py-4 rounded h-96 w-full md:w-[350px]">
+                <div className="flex flex-col bg-neutral-700 px-10 py-4 rounded h-96 w-full md:w-[450px]">
                   <div className="flex-1">{children}</div>
                 </div>
               </div>

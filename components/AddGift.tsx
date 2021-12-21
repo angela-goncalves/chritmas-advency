@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { GiftsTypes } from "../types";
 
 export default function AddGift({
-  addGifts,
   edit,
   gifts,
   setGifts,
@@ -13,7 +12,7 @@ export default function AddGift({
   const [forPeople, setForPeople] = useState("");
   const [counter, setCounter] = useState("0");
   const [image, setImage] = useState("");
-  //traer el prev
+  const [randomValue, setRandomValue] = useState("");
 
   const submitGifts = (e: any) => {
     e.preventDefault();
@@ -24,20 +23,19 @@ export default function AddGift({
     const id: number = Math.floor(Math.random() * 1000) + 1;
 
     setTitle("");
-    setCounter("0");
+    setCounter("");
     setImage("");
     setForPeople("");
     setOpen(false);
+    const findGift = gifts.findIndex((item: GiftsTypes) => item.id === edit.id);
 
-    const findGift = gifts.findIndex((item: GiftsTypes) => item.id === edit);
-
-    console.log(gifts, findGift, edit);
+    // console.log(gifts, findGift, edit);
     if (findGift > -1) {
       const editGift = gifts.map((item: GiftsTypes) => {
-        if (item.id === edit) {
+        if (item.id === edit.id) {
           return {
             ...item,
-            id: edit,
+            id: edit.id,
             title,
             forPeople,
             counter,
@@ -47,7 +45,6 @@ export default function AddGift({
         return item;
       });
       setGifts(editGift);
-      console.log(editGift);
       window.localStorage.setItem("gifts", JSON.stringify(editGift));
       setEdit("");
     } else {
@@ -59,6 +56,30 @@ export default function AddGift({
     }
   };
 
+  const randomGift = () => {
+    const randomGifts = [
+      "socks",
+      "airpods",
+      "t-shirt",
+      "trousers",
+      "hat",
+      "shoes",
+      "book",
+      "phone",
+      "watch",
+      "toy",
+      "blocks",
+      "candles",
+      "frame",
+      "tablet",
+      "watch",
+    ];
+    const randomIndex = Math.floor(Math.random() * randomGifts.length);
+    const valueRandomGift = randomGifts[randomIndex];
+    //console.log(valueRandomGift);
+    setTitle(valueRandomGift);
+  };
+
   return (
     <form
       onSubmit={submitGifts}
@@ -66,14 +87,23 @@ export default function AddGift({
     >
       <div>
         <label>Add gifts:</label>
-        <input
-          type="text"
-          name="title"
-          placeholder="add a new gift"
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
-          className="w-full rounded-lg border-2 p-2 focus:outline-none text-black"
-        />
+        <div className="flex justify-between">
+          <input
+            type="text"
+            name="title"
+            placeholder="add a new gift"
+            onChange={(e) => setTitle(e.target.value)}
+            value={title || edit.title}
+            className="w-32 h-11 rounded-lg border-2 p-2 focus:outline-none text-black"
+          />
+          <button
+            onClick={randomGift}
+            type="button"
+            className="text-cyan-600 rounded-lg bg-gray-100 p-2 px-3 focus:outline-none"
+          >
+            Random Gift!
+          </button>
+        </div>
       </div>
       <div className="mt-2">
         <label className="text-white">For:</label>
@@ -82,7 +112,7 @@ export default function AddGift({
           name="toPeople"
           placeholder="for?"
           onChange={(e) => setForPeople(e.target.value)}
-          value={forPeople}
+          value={forPeople || edit.forPeople}
           className="w-full rounded-lg border-2 p-2 focus:outline-none text-black"
         />
       </div>
@@ -91,8 +121,9 @@ export default function AddGift({
         <input
           type="number"
           name="counter"
-          value={counter}
+          placeholder="0"
           onChange={(e) => setCounter(e.target.value)}
+          value={counter || edit.counter}
           className="w-full border-2 py-2 px-1 rounded-lg focus:outline-none text-black"
         />
       </div>
@@ -101,17 +132,15 @@ export default function AddGift({
         <input
           type="url"
           name="url"
-          value={image}
           placeholder="https://imageOfGift.com"
+          value={image || edit.image}
           onChange={(e) => setImage(e.target.value)}
           className="w-full border-2 py-2 px-1 rounded-lg focus:outline-none text-black"
         />
       </div>
-      <input
-        type="submit"
-        className="mt-4 rounded-lg bg-green-500 p-2"
-        value="Add"
-      />
+      <button type="submit" className="mt-4 rounded-lg bg-green-500 p-2">
+        Add
+      </button>
     </form>
   );
 }

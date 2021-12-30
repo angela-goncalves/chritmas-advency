@@ -78,8 +78,20 @@ Now we need to know how much we're gonna spend on all gifts.
 
 ## Day 19:
 
-We want to the
+We want to give the same present to two different people, creating a button that opens the modal with the information of the gift we want to duplicate.
 
 ## Day 20:
 
+Add a button to preview, so we can see a clean list with just the gifts.
+
 ## Day 21:
+
+Print the list. The idea is print just the list without buttons
+
+## Day 22:
+
+Add sound effects so the user can activated if they want.
+
+## Day 23:
+
+Add some snowflakes.

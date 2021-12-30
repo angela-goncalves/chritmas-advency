@@ -6,17 +6,22 @@ export default function ListGifts({
   open,
   setOpen,
   setEdit,
+  setDuplicate,
 }: any) {
   //console.log(gift);
-  //agregar un booleano al objeto del elemento para saber si fue seleccionado o no. Ej. wantEdit: false
 
   const onEdit = () => {
     setEdit(gift);
     setOpen(!open);
   };
+  const onDuplicate = () => {
+    setDuplicate(gift);
+    setOpen(!open);
+  };
+
   return (
-    <ul>
-      <li className="w-full flex flex-row items-center justify-between">
+    <ul className="">
+      <li className="w-full grid grid-flow-col">
         <div className="flex flex-row">
           {gift.image.length <= 0 ? (
             <p className="w-16 mr-2 md:mr-5">¿image?</p>
@@ -42,10 +47,17 @@ export default function ListGifts({
             ) : (
               <p className="w-24">For: {gift.forPeople}</p>
             )}
+            <div className="flex flex-row">
+              {gift.price <= 0 ? (
+                <p className="w-7">price?</p>
+              ) : (
+                <p className="w-7">${gift.price * gift.counter}</p>
+              )}
+            </div>
           </div>
         </div>
 
-        <div className="">
+        <div>
           {/*edit button*/}
           <button
             onClick={onEdit}
@@ -69,7 +81,7 @@ export default function ListGifts({
 
           {/*duplicate button:*/}
           <button
-            onClick={onEdit}
+            onClick={onDuplicate}
             className="bg-white h-max py-1 px-2 rounded-lg mr-3 my-1"
           >
             <svg

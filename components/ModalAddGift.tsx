@@ -23,7 +23,7 @@ const ModalAddGift: FC<CartModalProps> = ({ open, setOpen, children }: any) => {
           >
             <Dialog.Overlay className="absolute inset-0 bg-gray-700 bg-opacity-70 transition-opacity" />
           </Transition.Child>
-          <div className="fixed top-32 right-32">
+          <div className="fixed top-32 sm:right-32 md:right-1/3">
             <Transition.Child
               as={Fragment}
               enter="transform transition ease-in-out duration-500 sm:duration-700"
@@ -34,7 +34,7 @@ const ModalAddGift: FC<CartModalProps> = ({ open, setOpen, children }: any) => {
               leaveTo="translate-x-full"
             >
               <div className="relative w-full">
-                <div className="flex flex-col bg-neutral-700 px-10 py-4 rounded h-96 w-full md:w-[450px]">
+                <div className="flex flex-col bg-neutral-700 px-10 py-4 rounded h-auto w-full md:w-[450px]">
                   <div className="flex-1">{children}</div>
                 </div>
               </div>

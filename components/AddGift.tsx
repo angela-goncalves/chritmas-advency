@@ -7,29 +7,37 @@ export default function AddGift({
   setGifts,
   setOpen,
   setEdit,
+  duplicate,
+  add,
+  setAdd,
+  setDuplicate,
 }: any) {
   const [title, setTitle] = useState("");
   const [forPeople, setForPeople] = useState("");
-  const [counter, setCounter] = useState("0");
+  const [counter, setCounter] = useState(0);
   const [image, setImage] = useState("");
-  const [randomValue, setRandomValue] = useState("");
+  const [price, setPrice] = useState(0);
+
+  console.log(duplicate.title);
 
   const submitGifts = (e: any) => {
     e.preventDefault();
-    if (title.length <= 0) {
-      return;
-    }
 
     const id: number = Math.floor(Math.random() * 1000) + 1;
+    const total: number = counter * price;
 
     setTitle("");
-    setCounter("");
+    setCounter(0);
     setImage("");
     setForPeople("");
     setOpen(false);
+    setEdit("");
+    setAdd(false);
+    setDuplicate("");
+
     const findGift = gifts.findIndex((item: GiftsTypes) => item.id === edit.id);
 
-    // console.log(gifts, findGift, edit);
+    console.log(gifts, findGift, edit);
     if (findGift > -1) {
       const editGift = gifts.map((item: GiftsTypes) => {
         if (item.id === edit.id) {
@@ -40,6 +48,8 @@ export default function AddGift({
             forPeople,
             counter,
             image,
+            price,
+            total,
           };
         }
         return item;
@@ -48,10 +58,19 @@ export default function AddGift({
       window.localStorage.setItem("gifts", JSON.stringify(editGift));
       setEdit("");
     } else {
-      setGifts([{ id, title, forPeople, counter, image }, ...gifts]);
+      if (title.length <= 0) {
+        return;
+      }
+      setGifts([
+        { id, title, forPeople, counter, image, price, total },
+        ...gifts,
+      ]);
       window.localStorage.setItem(
         "gifts",
-        JSON.stringify([{ id, title, forPeople, counter, image }, ...gifts])
+        JSON.stringify([
+          { id, title, forPeople, counter, image, price, total },
+          ...gifts,
+        ])
       );
     }
   };
@@ -93,13 +112,13 @@ export default function AddGift({
             name="title"
             placeholder="add a new gift"
             onChange={(e) => setTitle(e.target.value)}
-            value={title || edit.title}
-            className="w-32 h-11 rounded-lg border-2 p-2 focus:outline-none text-black"
+            value={title || duplicate.title || edit.title}
+            className="w-32 h-11 rounded-lg border-2 p-2 focus:outline-none focus-visible:ring-gray-400 focus-visible:ring-2 text-black"
           />
           <button
             onClick={randomGift}
             type="button"
-            className="text-cyan-600 rounded-lg bg-gray-100 p-2 px-3 focus:outline-none"
+            className="p-2 px-3 text-cyan-600 rounded-lg bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-600"
           >
             Random Gift!
           </button>
@@ -109,11 +128,11 @@ export default function AddGift({
         <label className="text-white">For:</label>
         <input
           type="text"
-          name="toPeople"
+          name="forPeople"
           placeholder="for?"
           onChange={(e) => setForPeople(e.target.value)}
-          value={forPeople || edit.forPeople}
-          className="w-full rounded-lg border-2 p-2 focus:outline-none text-black"
+          value={forPeople || duplicate.forPeople || edit.forPeople}
+          className="w-full rounded-lg border-2 p-2 focus:outline-none focus-visible:ring-gray-400 focus-visible:ring-2 text-black"
         />
       </div>
       <div className="mt-2">
@@ -121,10 +140,10 @@ export default function AddGift({
         <input
           type="number"
           name="counter"
-          placeholder="0"
-          onChange={(e) => setCounter(e.target.value)}
-          value={counter || edit.counter}
-          className="w-full border-2 py-2 px-1 rounded-lg focus:outline-none text-black"
+          placeholder="1"
+          onChange={(e) => setCounter(Number(e.target.value))}
+          value={counter || duplicate.counter || edit.counter}
+          className="w-full border-2 py-2 px-1 rounded-lg focus:outline-none focus-visible:ring-gray-400 focus-visible:ring-2 text-black"
         />
       </div>
       <div className="mt-2">
@@ -133,14 +152,27 @@ export default function AddGift({
           type="url"
           name="url"
           placeholder="https://imageOfGift.com"
-          value={image || edit.image}
           onChange={(e) => setImage(e.target.value)}
-          className="w-full border-2 py-2 px-1 rounded-lg focus:outline-none text-black"
+          value={image || duplicate.image || edit.image}
+          className="w-full border-2 py-2 px-1 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 text-black"
         />
       </div>
-      <button type="submit" className="mt-4 rounded-lg bg-green-500 p-2">
-        Add
-      </button>
+      <div className="mt-2">
+        <label>Price</label>
+        <input
+          type="number"
+          name="price"
+          placeholder="$$$"
+          onChange={(e) => setPrice(Number(e.target.value))}
+          value={price || duplicate.price}
+          className="w-full border-2 py-2 px-1 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 text-black"
+        />
+      </div>
+      <input
+        type="submit"
+        className="mt-4 rounded-lg bg-green-500 p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-800"
+        value="Add"
+      />
     </form>
   );
 }

@@ -9,6 +9,8 @@ export default function Home() {
   const [gifts, setGifts] = useState<GiftsTypes[]>([]);
   const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState("");
+  const [duplicate, setDuplicate] = useState("");
+  const [add, setAdd] = useState(false);
 
   useEffect(() => {
     let setInLocalStorage = JSON.parse(localStorage.getItem("gifts") || "[]");
@@ -31,6 +33,12 @@ export default function Home() {
     setGifts([]);
     window.localStorage.setItem("gifts", JSON.stringify([]));
   };
+  const buttonAdd = () => {
+    setAdd(!add);
+    setOpen(true);
+  };
+
+  const total = gifts.reduce((acc, el) => acc + el.total, 0);
 
   return (
     <div>
@@ -47,12 +55,12 @@ export default function Home() {
           rel="stylesheet"
         />
       </Head>
-      <main className="w-full mt-20">
-        <div className="flex space-x-8 md:justify-between mb-4 items-center ">
+      <main className="w-full mt-20 ">
+        <div className="flex space-x-8 md:justify-between mb-4 items-center print:bg-white print:text-black">
           <h1 className="font-titleH1 text-4xl md:text-5xl">Christmas List:</h1>
           <button
-            onClick={() => setOpen(true)}
-            className="bg-green-500 p-2 rounded-lg h-max"
+            onClick={buttonAdd}
+            className="bg-green-500 p-2 rounded-lg h-max focus:outline-none focus-visible:ring-2 focus-visible:ring-green-800 print:hidden"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -79,10 +87,14 @@ export default function Home() {
             gifts={gifts}
             setGifts={setGifts}
             setOpen={setOpen}
+            duplicate={duplicate}
+            add={add}
+            setAdd={setAdd}
+            setDuplicate={setDuplicate}
           />
         </ModalAddGift>
 
-        <div className="flex flex-col justify-between h-[450px] w-[350px] md:w-[400px] overflow-auto p-4 bg-neutral-700 rounded-md">
+        <div className="grid grid-flow-row h-[450px] w-[350px] md:w-[450px] overflow-auto p-4 bg-neutral-700 rounded-md">
           {gifts.length === 0 ? (
             <p className="pt-4 text-center">Oh no! The list is empty!</p>
           ) : (
@@ -93,6 +105,7 @@ export default function Home() {
                     gift={gift}
                     deleteGift={deleteGift}
                     setEdit={setEdit}
+                    setDuplicate={setDuplicate}
                     open={open}
                     setOpen={setOpen}
                   />
@@ -100,11 +113,11 @@ export default function Home() {
               );
             })
           )}
-
+          {total === 0 ? "" : <p>{total}</p>}
           {gifts.length >= 2 ? (
             <button
               onClick={deleteAll}
-              className="self-center w-full mt-6 text-black rounded-lg bg-gray-300 p-2 focus:outline-none"
+              className="self-center w-full mt-6 text-black rounded-lg bg-gray-300 p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-black print:hidden"
             >
               Delete all
             </button>
